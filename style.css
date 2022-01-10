@@ -3,16 +3,19 @@
 body {
   margin: auto;
   background-color: black;
+  overflow-x: hidden;
 }
 
 main {
   margin: 0 auto;
-  width : 99vw
+  width : 99vw;
+  margin-bottom: 100px;
 }
 
 article {
   margin: 2vh 10vw;
   overflow: hidden;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-p, span {
+p, span, label {
     font-family: "Source Sans Pro", arial, sans-serif;
     font-size: 2.2vh;
     color: #fcf7ff;
@@ -54,6 +57,53 @@ a:hover {
 
 a:active {
   color: #322ce8
+}
+
+label {
+  color: #f6cd39;
+  font-variant: small-caps;
+
+}
+
+select {
+  margin: 10px;
+  font-variant: small-caps;
+  font-size: 2.4vh;
+
+}
+
+input {
+  width: 27vw;
+  height: 2.5vh;
+  font-size: 2.4vh;
+  background-color: #322ce8;
+  border: none;
+  font-family: "Bebas Neue", arial, sans-serif;
+  color: #f6cd39;
+  border-radius: 2.5px;
+}
+
+button {
+  width: 100%;
+  height: 5vh;
+  font-family: "Bebas Neue", arial, sans-serif;
+  color: #f6cd39;
+  display: block;
+  font-size: 4.5vh;
+background-color: #322ce8;
+border: none;
+border-radius: 2.5px;
+
+}
+
+select {
+  width: 20vw;
+  height: 2.5vh;
+  font-family: "Bebas Neue", arial, sans-serif;
+  color: #f6cd39;
+  background-color: #322ce8;
+  border: none;
+  border-radius: 2.5px;
 }
 
 header  {
