@@ -8,8 +8,9 @@
   <meta name="author" content="Bianchetti Federico, Panic Nikola" />
   <link type="text/css" href="style.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!--<meta http-equiv='Refresh' content='15' /> -->
+  <script type='text/javascript' src='javascript/script.js'></script>
 
   <link rel="icon" href="media/favicon.png" />
   <title>Football Information Ontology</title>
@@ -40,23 +41,26 @@
 <p>With <a href='index.html'>FIO</a> you can get a variety of information regarding your favorite sport, take a look below to try out the features:</p>
 
 
-<form>
 <label for='query_type'>what are you looking for?</label>
-<select name='query_type'>
-  <option value='preset'>query type</option>
-  <option value='query_1'>query 1</option>
-  <option value='query_2'>query 2</option>
-  <option value='query_3'>query 3</option>
-  <option value='query_4'>query 4</option>
-  <option value='query_5'>query 5</option>
+<select id='query_type' name='query_type'>
+  <option value='0'>Select a query</option>
+  <option value='1'>Round to be played</option>
+  <option value='2'>Coach of a team</option>
+  <option value='3'>Matches not played</option>
+  <option value='4'>Matches played and their referee</option>
+  <option value='5'>Team of a player</option>
 </select>
 
-<label for='filter'>filter (optional)</label>
-<input name='filter' type='text' />
-<p>Query description.</p>
-<button>submit</button>
+<p id='query_description'>Please, select a query.</p>
+<button class='enter'>submit</button>
 
-</form>
+<div id='result'>
+<h3>Output</h3>
+<p>Below you can find the result of the query:</p>
+<table>
+</table>
+
+</div>
 </article>
 
 
@@ -67,11 +71,13 @@
 <footer>
 <div>
   <h1 class="info">About us</h1>
-  <span>Questo sito è parte del progetto del corso di Modellazione Semantica 2021/2022, è stato sviluppato da Bianchetti Federico e Panic Nikola.</span>
+  <span>This site is part of the project "Modellazione Semantica" 2021/2022, it has been developed by Bianchetti Federico e Panic Nikola.</span>
 
 </div>
 
 </footer>
+
+
 </body>
 
 
