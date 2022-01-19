@@ -8,16 +8,19 @@
   <meta name="author" content="Bianchetti Federico, Panic Nikola" />
   <link type="text/css" href="style.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.global.js"></script>
+
   <!--<meta http-equiv='Refresh' content='15' /> -->
   <script type='text/javascript' src='javascript/script.js'></script>
+  <script type='text/javascript' src='javascript/service.js'></script>
 
   <link rel="icon" href="media/favicon.png" />
   <title>Football Information Ontology</title>
 </head>
 
 <body>
-  <nav id="desktop-view-navbar">
+  <nav>
     <div>
     <a href="index.html"><img src='media/logo.png' alt='logo della piattaforma' /></a>
     </nav>
@@ -57,8 +60,7 @@
 <div id='result'>
 <h3>Output</h3>
 <p>Below you can find the result of the query:</p>
-<table>
-</table>
+<p id='output'></p>
 
 </div>
 </article>
