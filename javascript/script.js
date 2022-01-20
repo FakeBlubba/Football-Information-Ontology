@@ -28,7 +28,6 @@ $(document).ready(function() {
     // changes the query description when the user selects a different option
     else if(opt == 4) {
       var desc = "The query returns a report of the played matches.";
-
     }
 
     $('#query_description').text(desc); // the description will change text
@@ -55,9 +54,6 @@ $(document).ready(function() {
          while (result.includes('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#')) {
            result = result.replace('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#', ' ');
          }
-
-         //console.log(formatResultTitles(result));
-         //console.log(formatResult(result));
          tableMaker(result);
        }
 

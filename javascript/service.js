@@ -81,7 +81,7 @@ function formatResult(query_output) {
   var body = [];
 
   body = query_output.split(' ');
-  titles = body[0].split(',')
+  titles = body[0].split(',');
 
 
   // put data into records
@@ -127,6 +127,5 @@ function tableMaker(query_result) {
     head = "<th>" + title_array[i];
     head = head.concat("</th>")
     var cell = row.insertCell(i).outerHTML = head;
-    cell.innerHTML = title_array[i];
   }
 }
