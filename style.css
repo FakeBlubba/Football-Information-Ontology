@@ -102,10 +102,10 @@ button {
   color: #f6cd39;
   display: block;
   font-size: 4.5vh;
-background-color: #322ce8;
-border: none;
-border-radius: 2.5px;
-
+  background-color: #322ce8;
+  border: none;
+  border-radius: 2.5px;
+  cursor: pointer;
 }
 
 select {
@@ -198,4 +198,49 @@ footer h1 {
 .down-arrow-div:active .down-arrow {
   transform: rotate(360deg);
   transition: .5s;
+}
+
+table {
+  background-color:  #322ce8;
+  border-radius: 5px;
+  color: #f6cd39;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+th {
+  font-size: 30px;
+  width: 60%;
+  border-bottom: 2.5px solid #ccc;
+  font-family: 'Bebas Neue', sans-serif;
+  padding: 10px;
+  font-size: 3.5vw;
+}
+
+tr:first-child > th {
+    color: #f6cd39;
+}
+
+td {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;
+  letter-spacing: 2.5px;
+  text-align: left;
+  padding-left: 1%;
+  border-bottom: 2.5px solid #ccc;
+  color: white;
+  padding: 10px;
+}
+
+
+tr:first-child {
+  border-radius: 7.5px 0 0 0;
+
+}
+
+tr:last-child {
+  border-radius: 0 0 0 7.5px;
+  border-radius: 0 0 7.5px 0;
 }

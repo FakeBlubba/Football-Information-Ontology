@@ -17,22 +17,17 @@ $(document).ready(function() {
 
     // changes the query description when the user selects a different option
     else if(opt == 2) {
-      var desc = "Query the ontology to find out who is the coach of a certain team.";
+      var desc = "Query the ontology to find out where everyone was born.";
     }
 
     // changes the query description when the user selects a different option
     else if(opt == 3) {
-      var desc = "This query returns the matches not played.";
-    }
-
-    // changes the query description when the user selects a different option
-    else if(opt == 4) {
       var desc = 'Returns the matches already played and their referees.';
     }
 
     // changes the query description when the user selects a different option
-    else if(opt == 5) {
-      var desc = "The query returns the Team where a certain player is.";
+    else if(opt == 4) {
+      var desc = "The query returns a report of the played matches.";
 
     }
 
@@ -48,20 +43,22 @@ $(document).ready(function() {
 
       $('#result').fadeIn('slow');  //Mostra i risultati nella pagina
       var query = getQuery(opt);
-      console.log(query);
 
+      // give query information to the engine
       $.ajax({
        url: "http://localhost:7200/repositories/FIO",
        type: "get",
        dataType: "text",
        data: { query: query },
-       success: function (result) {
+       success: function (result) { // here's the function to give formatted results
 
          while (result.includes('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#')) {
            result = result.replace('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#', ' ');
          }
 
-         $("#output").text(result);
+         //console.log(formatResultTitles(result));
+         //console.log(formatResult(result));
+         tableMaker(result);
        }
 
       });

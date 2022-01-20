@@ -24,38 +24,21 @@ function getQuery(number) {
 
   // get the required query
   else if(number == 2) {
-    var filter_value = prompt('Write the name of the team you are looking for', 'For example: "JuventusFC"');
-    var query = `
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
+    var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
 
-    SELECT  ?coach ?team
-    WHERE {
-      ?team 	fio:trainedBy 	?coach;
-      fio:name "`+ filter_value +`"^^<http://www.w3.org/2000/01/rdf-schema#String>.
-    }`;
+SELECT DISTINCT ?person ?country
+	WHERE {
+		?person fio:bornIn ?country.
+ }
+ORDER BY ?country`;
   }
 
   // get the required query
   else if(number == 3) {
-    var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
-
-    SELECT ?match
-    WHERE {
-      ?match rdf:type fio:Match.
-      MINUS{?playedmatches rdf:type fio:PlayedMatch}
-    }`;
-  }
-
-  // get the required query
-  else if(number == 4) {
     var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -70,23 +53,80 @@ function getQuery(number) {
   }
 
   // get the required query
-  else if(number == 5) {
-    var filter_value = prompt('Write the name of the player you are looking for', 'For example: "PauloDybala"');
-    var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX owl: <http://www.w3.org/2002/07/owl#>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-    PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
+  else if(number == 4) {
 
-    SELECT  ?player ?role ?team
-    WHERE {
-      ?player rdf:type	fio:ActivePlayer;
-      fio:hasPosition ?role;
-      fio:playsFor ?team;
-      fio:name "`+ filter_value +`"^^<http://www.w3.org/2000/01/rdf-schema#String>
-    }`;
+    var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
+
+SELECT ?match ?home ?guest ?date
+	WHERE { ?match a fio:PlayedMatch;
+		fio:homeGoals ?home;
+		fio:hostGoals ?guest;
+    fio:playedOn ?date.
+ }
+ ORDER BY ?date`;
   }
 
   return query;
 
+}
+
+// Returns the titles and the records of the query in two array
+function formatResult(query_output) {
+  var titles = [];
+  var records = [];
+  var body = [];
+
+  body = query_output.split(' ');
+  titles = body[0].split(',')
+
+
+  // put data into records
+  for( var i = 1; i < body.length; i++ ) {
+    records.push(body[i]);
+  }
+
+  // to avoid errors like in the 5th query
+  if(records.length == 1) {
+    records = records[0].split(',');
+  }
+
+  return [titles, records];
+}
+
+// creates a table and populate it with results
+function tableMaker(query_result) {
+  $("#output tr").remove(); // reset the table' data
+
+  // declaration of variables
+  var table = document.getElementById('output')
+  var title_array = formatResult(query_result)[0];
+  var records_array = formatResult(query_result)[1];
+  var number_of_rows = records_array.length / title_array.length;
+  var number_of_cells = records_array.length / number_of_rows;
+  var data = 0
+
+  // creates rows for data
+  for( var rows = 0; rows < number_of_rows; rows++) {
+    var r = table.insertRow(rows);
+
+    // creates cells for data
+    for( var cells = 0; cells < number_of_cells; cells++) {
+      var c = r.insertCell(cells);
+      c.innerHTML = records_array[data];
+      data++;
+    }
+  }
+
+  // inserting first table row and th
+  var row = table.insertRow(0);
+  for(var i = 0; i < title_array.length; i++) {
+    head = "<th>" + title_array[i];
+    head = head.concat("</th>")
+    var cell = row.insertCell(i).outerHTML = head;
+    cell.innerHTML = title_array[i];
+  }
 }
