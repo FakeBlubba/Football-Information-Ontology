@@ -114,13 +114,11 @@ function formatResult(query_output) {
 function tableMaker(query_result) {
   $("#output tr").remove(); // reset the table' data
 
+
   // declaration of variables
   var table = document.getElementById('output');
-  //console.log(query_result);
   var title_array = formatResult(query_result)[0];
-  //console.log(title_array)
   var records_array = formatResult(query_result)[1];
-  //console.log(records_array)
   var number_of_rows = records_array.length / title_array.length;
   var number_of_cells = records_array.length / number_of_rows;
   var data = 0
