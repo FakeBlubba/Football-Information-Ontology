@@ -25,16 +25,16 @@ function getQuery(number) {
   // get the required query
   else if(number == 2) {
     var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
 
-SELECT DISTINCT ?person ?country
-	WHERE {
-		?person fio:bornIn ?country.
- }
-ORDER BY ?country`;
+    SELECT DISTINCT ?person ?country
+    WHERE {
+      ?person fio:bornIn ?country.
+    }
+    ORDER BY ?country`;
   }
 
   // get the required query
@@ -56,18 +56,18 @@ ORDER BY ?country`;
   else if(number == 4) {
 
     var query = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX fio: <http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#>
 
-SELECT ?match ?home ?guest ?date
-	WHERE { ?match a fio:PlayedMatch;
-		fio:homeGoals ?home;
-		fio:hostGoals ?guest;
-    fio:playedOn ?date.
- }
- ORDER BY ?date`;
+    SELECT ?match ?home ?guest ?date
+    WHERE { ?match a fio:PlayedMatch;
+      fio:homeGoals ?home;
+      fio:hostGoals ?guest;
+      fio:playedOn ?date.
+    }
+    ORDER BY ?date`;
   }
 
   return query;
@@ -86,12 +86,25 @@ function formatResult(query_output) {
 
   // put data into records
   for( var i = 1; i < body.length; i++ ) {
-    records.push(body[i]);
-  }
 
-  // to avoid errors like in the 5th query
-  if(records.length == 1) {
-    records = records[0].split(',');
+    var chars = [',', '_', '-'];
+
+    // to avoid errors like in the 4th query
+    if(body.length == 2) {
+      body = body[1].split(',');
+      i--
+    }
+
+    // to better format the result text
+    for( var j = 0; j < chars.length; j++ ) {
+
+      while( body[i].includes(chars[j]) ) {
+        body[i] = body[i].replace(chars[j], ' ')
+      }
+
+    }
+
+    records.push(body[i]);
   }
 
   return [titles, records];
@@ -102,9 +115,12 @@ function tableMaker(query_result) {
   $("#output tr").remove(); // reset the table' data
 
   // declaration of variables
-  var table = document.getElementById('output')
+  var table = document.getElementById('output');
+  //console.log(query_result);
   var title_array = formatResult(query_result)[0];
+  //console.log(title_array)
   var records_array = formatResult(query_result)[1];
+  //console.log(records_array)
   var number_of_rows = records_array.length / title_array.length;
   var number_of_cells = records_array.length / number_of_rows;
   var data = 0

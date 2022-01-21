@@ -19,19 +19,19 @@ article {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Bebas Neue", arial, sans-serif;
-    color: #322ce8;
-    position: relative;
-    display: inline;
-    border-bottom: 1vh solid #f6cd39;
-    line-height: 8vh;
+  font-family: "Bebas Neue", arial, sans-serif;
+  color: #322ce8;
+  position: relative;
+  display: inline;
+  border-bottom: 1vh solid #f6cd39;
+  line-height: 8vh;
 }
 
 
 p, span, label {
-    font-family: "Source Sans Pro", arial, sans-serif;
-    font-size: 2.2vh;
-    color: #fcf7ff;
+  font-family: "Source Sans Pro", arial, sans-serif;
+  font-size: 2.2vh;
+  color: #fcf7ff;
 }
 
 h1 {
@@ -220,7 +220,7 @@ th {
 }
 
 tr:first-child > th {
-    color: #f6cd39;
+  color: #f6cd39;
 }
 
 td {

@@ -1,3 +1,4 @@
+var link = "http://fedora:7200/repositories/FIO";
 
 $(document).ready(function() {
 
@@ -45,22 +46,22 @@ $(document).ready(function() {
 
       // give query information to the engine
       $.ajax({
-       url: "http://localhost:7200/repositories/FIO",
-       type: "get",
-       dataType: "text",
-       data: { query: query },
-       success: function (result) { // here's the function to give formatted results
+        url: link,
+        type: "get",
+        dataType: "text",
+        data: { query: query },
+        success: function (result) { // here's the function to give formatted results
 
-         while (result.includes('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#')) {
-           result = result.replace('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#', ' ');
-         }
-         tableMaker(result);
-       }
+          while (result.includes('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#')) {
+            result = result.replace('http://www.semanticweb.org/nikpa/ontologies/2021/11/fio#', ' ');
+          }
+          tableMaker(result);
+        }
 
       });
-     } else {
+    } else {
       alert('Please: select a query!'); // Messaggio di errore in caso non si sia compilato il campo
     }
 
-});
+  });
 });
